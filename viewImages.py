@@ -5,9 +5,24 @@ from photometry.ds9 import (
     ds9Display
     )
 
+
 ds9_name = 'my_ds9'
 setUpDs9(ds9_name)
 image_list = g.glob('**/*.fts', recursive=True)
+
+# preset cwd to appropriate folder
+cwd = os.getcwd()
+print('Current working directory:\n cwd')
+change_dir = input('Is this the correct directory? (y/n)')
+while not dir_check:
+    if change_dir.lower() == 'y':
+        dir_check == 1
+    elif change_dir.lower == 'n':
+        new_dir = input('Enter desired directory (absolute):\n')
+        os.chdir(new_dir)
+    else:
+        print('Invalid input!')
+        change_dir = input('Is this the correct directory? (y/n)')
 
 if not os.path.exists('junk'):
     os.mkdir('junk/')
@@ -38,5 +53,3 @@ for image in image_list:
         print('Image moved to junk')
     else:
         print('Hurray!')
-
-print('All images have been checked, GG')
